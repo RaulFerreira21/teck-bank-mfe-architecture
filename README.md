@@ -1,1 +1,1 @@
-# teck-bank-mfe-archtecture
+# teck-bank-mfe-architecture
