@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:aboutAndLogin": "node dist/aboutAndLogin/server/server.mjs"
+    "serve:ssr:aboutAndLogin": "node dist/aboutAndLogin/server/server.mjs",
+    "serve:ssr:loginPage": "node dist/loginPage/server/server.mjs"
   },
   "private": true,
   "dependencies": {

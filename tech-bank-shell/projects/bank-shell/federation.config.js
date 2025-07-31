@@ -2,6 +2,10 @@ const { withNativeFederation, shareAll } = require('@angular-architects/native-f
 
 module.exports = withNativeFederation({
 
+  remotes: {
+    bytebankApp: 'http://localhost:5173/remoteEntry.js'
+  },
+
   shared: {
     ...shareAll({ singleton: true, strictVersion: true, requiredVersion: 'auto' }),
   },

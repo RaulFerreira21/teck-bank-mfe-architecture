@@ -31,10 +31,10 @@
       "path": "./projects/bank-shell/tsconfig.spec.json"
     },
     {
-      "path": "./projects/about-and-login/tsconfig.app.json"
+      "path": "./projects/login-page/tsconfig.app.json"
     },
     {
-      "path": "./projects/about-and-login/tsconfig.spec.json"
+      "path": "./projects/login-page/tsconfig.spec.json"
     }
   ]
 }

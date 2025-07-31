@@ -16,11 +16,11 @@
 			"architect": {
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
-          "options": {
-            "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css"
-            ]
-          },
+					"options": {
+						"styles": [
+							"@angular/material/prebuilt-themes/azure-blue.css"
+						]
+					},
 					"configurations": {
 						"production": {
 							"target": "bankShell:esbuild:production"
@@ -60,9 +60,9 @@
 							}
 						],
 						"styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/bank-shell/src/styles.scss"
-            ]
+							"@angular/material/prebuilt-themes/azure-blue.css",
+							"projects/bank-shell/src/styles.scss"
+						]
 					}
 				},
 				"esbuild": {
@@ -140,10 +140,10 @@
 				"build": {
 					"builder": "@angular-architects/native-federation:build",
 					"options": {
-            "ssr": true,
-            "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css"
-            ]
+						"ssr": true,
+						"styles": [
+							"@angular/material/prebuilt-themes/azure-blue.css"
+						]
 					},
 					"configurations": {
 						"production": {
@@ -184,9 +184,9 @@
 							}
 						],
 						"styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "projects/about-and-login/src/styles.scss"
-            ]
+							"@angular/material/prebuilt-themes/azure-blue.css",
+							"projects/about-and-login/src/styles.scss"
+						]
 					}
 				},
 				"esbuild": {
@@ -246,6 +246,130 @@
 						},
 						"development": {
 							"buildTarget": "aboutAndLogin:esbuild:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4201
+					}
+				}
+			}
+		},
+		"loginPage": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss"
+				}
+			},
+			"root": "projects/login-page",
+			"sourceRoot": "projects/login-page/src",
+			"prefix": "app-loginPage",
+			"architect": {
+				"build": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+            "ssr": true,
+            "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css"
+            ]
+					},
+					"configurations": {
+						"production": {
+							"target": "loginPage:esbuild:production"
+						},
+						"development": {
+							"target": "loginPage:esbuild:development",
+							"dev": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-architects/native-federation:build",
+					"options": {
+						"target": "loginPage:serve-original:development",
+						"rebuildDelay": 0,
+						"dev": true,
+						"port": 0
+					}
+				},
+				"extract-i18n": {
+					"builder": "@angular/build:extract-i18n"
+				},
+				"test": {
+					"builder": "@angular/build:karma",
+					"options": {
+						"tsConfig": "projects/login-page/tsconfig.spec.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/login-page/public"
+							}
+						],
+						"styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "projects/login-page/src/styles.scss"
+            ]
+					}
+				},
+				"esbuild": {
+					"builder": "@angular-devkit/build-angular:application",
+					"options": {
+						"browser": "projects/login-page/src/main.ts",
+						"tsConfig": "projects/login-page/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							{
+								"glob": "**/*",
+								"input": "projects/login-page/public"
+							}
+						],
+						"styles": [
+							"projects/login-page/src/styles.scss"
+						],
+						"server": "projects/login-page/src/main.server.ts",
+						"outputMode": "server",
+						"ssr": {
+							"entry": "projects/login-page/src/server.ts"
+						},
+						"polyfills": [
+							"es-module-shims"
+						]
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kB",
+									"maximumError": "1MB"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "4kB",
+									"maximumError": "8kB"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"optimization": false,
+							"extractLicenses": false,
+							"sourceMap": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve-original": {
+					"builder": "@angular/build:dev-server",
+					"configurations": {
+						"production": {
+							"buildTarget": "loginPage:esbuild:production"
+						},
+						"development": {
+							"buildTarget": "loginPage:esbuild:development"
 						}
 					},
 					"defaultConfiguration": "development",
