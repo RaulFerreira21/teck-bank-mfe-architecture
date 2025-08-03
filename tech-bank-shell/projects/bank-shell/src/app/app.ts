@@ -5,7 +5,7 @@ import { RouterOutlet } from '@angular/router';
   selector: 'app-shell-root',
   imports: [RouterOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   protected title = 'bankShell';

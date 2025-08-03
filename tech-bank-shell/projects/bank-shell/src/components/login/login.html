@@ -1,0 +1,55 @@
+<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+  <div class="login">
+    <div class="container">
+      <div>
+        <h2 class="">Bem-vindo ao Bank Shell</h2>
+        <p class="">
+          Faça login para acessar sua conta e aproveitar nossos serviços.
+        </p>
+      </div>
+
+      <div>
+        <img
+          src="assets/ilustracao-cadastro.svg"
+          alt="Bank Logo"
+          class="img-responsive center-block"
+        />
+      </div>
+    </div>
+
+    <div class="section-2">
+      <div class="section-22">
+        <h1 class="title">Login</h1>
+        <div class="form-group email">
+          <label class="input-field" for="username">Name</label>
+          <input
+            type="text"
+            id="username"
+            class="form-control"
+            placeholder="Digite seu nome"
+            name="username"
+            [(ngModel)]="username"
+            required
+          />
+        </div>
+
+        <div class="form-group senha">
+          <label class="input-field" for="password">Senha</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            name="password"
+            [(ngModel)]="password"
+            placeholder="Digite sua senha"
+            required
+          />
+        </div>
+        <div class="button">
+          <button type="submit" class="btn btn-primary">Acessar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<p *ngIf="error" style="color: red">{{ error }}</p>
