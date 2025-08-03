@@ -1,26 +1,33 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
-interface LoginResponse {
-  id: number;
-  username: string;
-  email: string;
-  token: string;
-}
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
-  private baseUrl = 'https://dummyjson.com/auth';
+  private readonly apiUrl = 'https://dummyjson.com/auth/login';
 
-  constructor(private http: HttpClient) {}
+  async login(username: string, password: string): Promise<any> {
+    try {
+      const response = await fetch(this.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username,
+          password,
+          expiresInMins: 30,
+        }),
+      });
 
-  login(username: string, password: string): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, {
-      username,
-      password,
-    });
+      if (!response.ok) {
+        throw new Error('Falha no login');
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error('Erro no login:', error);
+      throw error;
+    }
   }
 }

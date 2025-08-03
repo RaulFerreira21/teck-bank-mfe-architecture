@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Auth } from '../../services/auth';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-login',
@@ -12,22 +12,18 @@ import { Router } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-  username = '';
-  password = '';
-  error = '';
+  username = 'emilys';
+  password = 'emilyspass';
 
   constructor(private auth: Auth, private router: Router) {}
 
-  onSubmit(): void {
-    this.auth.login(this.username, this.password).subscribe({
-      next: (response) => {
-        console.log('Login bem-sucedido:', response);
-        this.router.navigate(['/home']);
-      },
-      error: (err) => {
-        console.error('Erro no login:', err);
-        this.error = 'Usuário ou senha inválidos.';
-      },
-    });
+  async onSubmit() {
+    try {
+      const response = await this.auth.login(this.username, this.password);
+      console.log('Login bem-sucedido:', response);
+      this.router.navigate(['/home']);
+    } catch (error) {
+      console.error('Erro:', error);
+    }
   }
 }
